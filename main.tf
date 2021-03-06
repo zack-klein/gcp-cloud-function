@@ -3,22 +3,15 @@ locals {
   bucket_name = var.bucket_name != null ? var.bucket_name : "${var.project_id}-${var.function_name}-function-storage"
 }
 
-# The code
-data "archive_file" "init" {
-  type        = "zip"
-  source_dir = "${path.cwd}/${var.source_dir}"
-  output_path = local.zip_dir
-}
-
 # Bucket to store code
 resource "google_storage_bucket" "function_storage" {
   name = local.bucket_name
 }
 
 resource "google_storage_bucket_object" "archive" {
-  name   = filesha256(local.zip_dir)
+  name   = var.source_zip.output_sha
   bucket = google_storage_bucket.function_storage.name
-  source = local.zip_dir
+  source = var.source_zip.output_path
 }
 
 # Function itself

@@ -13,9 +13,8 @@ variable "entry_point" {
     description = "The cloud function's entrypoint."
 }
 
-variable "source_dir" {
-    type = string
-    description = "The relative path to the function code."
+variable "source_zip" {
+    description = "A zipped up file or directory ready for deployment."
 }
 
 variable "bucket_name" {
