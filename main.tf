@@ -1,7 +1,7 @@
 locals {
   zip_dir               = "${path.cwd}/src.zip"
   bucket_name           = var.bucket_name != null ? var.bucket_name : "${var.project_id}-${var.function_name}-function-storage"
-  service_account_email = var.service_account_email ? var.service_account_email : null
+  service_account_email = var.service_account_email != null ? var.service_account_email : null
 }
 
 # Bucket to store code
